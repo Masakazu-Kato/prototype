@@ -1,0 +1,38 @@
+@charset "utf-8";
+
+body[data-vendor=fppartner] header.navbar.bg-dark {
+    background-color: #7d4698 !important;
+}
+
+body[data-vendor=daiwahouse] header.navbar.bg-dark {
+    background-color: darkred !important;
+}
+
+body[data-vendor=suumo] header.navbar.bg-dark {
+    background-color: darkred !important;
+}
+
+body[data-vendor=kddiweb] header.navbar.bg-dark {
+    background-color: darkorange !important;
+}
+
+body[data-vendor=odakyu] header.navbar.bg-dark {
+    background-color: darkblue !important;
+}
+
+body[data-vendor=kddi] header.navbar.bg-dark {
+    background-color: darkorange !important;
+}
+
+body[data-vendor=minnanokenkoulounge] header.navbar.bg-dark {
+    background-color: olivedrab !important;
+}
+
+body[data-vendor=wellstyle] header.navbar.bg-dark {
+    background-color: lightskyblue !important;
+}
+
+body[data-vendor=jmsys] header.navbar.bg-dark {
+    background-color: lightskyblue !important;
+}
+

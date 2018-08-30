@@ -1,0 +1,266 @@
+.table-editable td .btn > .fas,
+.table-editable td .progress .fas {
+    margin-right: .25rem;
+}
+
+.table-editable th.required::after {
+    content: '必須';
+    color: white;
+    background-color: rgba(193, 31, 45, 1);
+    font-size: .7rem;
+    padding: .1rem .4rem;
+    border-radius: 3px;
+    float: right;
+    margin-top: .2rem;
+}
+
+.table-editable .input-group-separated > .input-group-addon {
+    width: 1rem;
+}
+
+.table-editable .input-group-separated > .input-group-addon.hyphen {
+    margin-left: calc( -.5rem);
+    margin-right: 0;
+}
+
+.table-editable .input-group-separated[data-type=birthdate] > .input-group-addon:last-child {
+    width: auto;
+}
+
+.table-editable .input-group[data-type=name] > .form-control,
+.table-editable .input-group[data-type=name_kana] > .form-control {
+    width: 11.5rem;
+}
+
+.table-editable .input-group-separated[data-type=zipcode] > .form-control[name=zipcode1] {
+    width: 5.5rem;
+}
+
+.table-editable .input-group-separated[data-type=zipcode] > .form-control[name=zipcode2] {
+    width: 7.9rem;
+}
+
+.table-editable .input-group-separated[data-type=phone] > .form-control {
+    width: 7rem;
+}
+
+.table-editable .form-control[name=prefecture_id] {
+    width: 23rem;
+}
+
+.table-editable .form-control[name=city] {
+    width: 16rem;
+}
+
+.table-editable .form-control[name=street] {
+    width: 23rem;
+}
+
+.table-editable .form-control[name=building] {
+    width: 23rem;
+}
+
+.table-editable .form-control[name=email] {
+    width: 23rem;
+}
+
+.table-editable .input-group[data-type=email] .input-group-text {
+    padding: 0;
+    width: 2.125rem;
+    justify-content: center;
+}
+
+.table-editable .input-group-separated[data-type=birthdate] > .form-control[name=birth_year] {
+    width: 8rem;
+}
+
+.table-editable .input-group-separated[data-type=birthdate] > .form-control[name=birth_month],
+.table-editable .input-group-separated[data-type=birthdate] > .form-control[name=birth_day] {
+    width: 4rem;
+}
+
+.table-editable .input-group-separated.invalid[data-type=matters] {
+    color: rgba(193, 31, 45, 1);
+}
+
+.table-editable .form-control[name$=job_category_id],
+.table-editable .form-control[name$=job_category_name] {
+    width: 22rem;
+}
+
+.table-editable .form-control[name=matter_detail] {
+    width: 100%;
+}
+
+.table-editable .input-group-separated[data-type=matters] {
+    flex-wrap: wrap;
+    margin-bottom: -.5rem;
+}
+
+.table-editable .input-group-separated[data-type=matters] .checkbox {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.table-editable .counseling_place_detail {
+    padding: 0;
+}
+
+.table-editable .counseling_place_detail > div {
+    margin-top: .5rem;
+    display: none;
+}
+
+.table-editable .counseling_place_detail .detail {
+    margin-top: .5rem;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+}
+
+.table-editable .counseling_place_detail .table.detail {
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.table-editable .counseling_place_detail .table.detail th {
+    font-weight: normal;
+    padding: .25rem .5rem;
+    max-width: 6rem;
+    min-width: 6rem;
+        width: 6rem;
+}
+
+.table-editable .counseling_place_detail .table.detail td {
+    padding: 0 .5rem;
+}
+
+.table-editable .counseling_place_detail .table.detail input {
+    padding: 0;
+    margin-bottom: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.table-editable .counseling_place_detail .form-control[name=address],
+.table-editable .counseling_place_detail select {
+    width: 100%;
+}
+
+.table-editable .counseling_place_detail .form-control[name=address] {
+    margin-top: .5rem;
+}
+
+.table-editable .input-group-separated[data-type=counseling_time] {
+    width: 100%;
+    margin-top: .5rem !important;
+}
+
+.table-editable .input-group-separated[data-type=contact_date] > .form-control,
+.table-editable .input-group-separated[data-type=counseling_date] > .form-control,
+.table-editable .input-group-separated[data-type=counseling_time] > .form-control {
+    width: 4rem;
+}
+
+.table-editable .input-group-separated[data-type=contact_date] > .form-control[name=year],
+.table-editable .input-group-separated[data-type=counseling_date] > .form-control[name=year] {
+    width: 8rem;
+}
+
+.table-editable .form-control[name=family_restaurant_area],
+.table-editable .form-control[name=counseling_place_id],
+.table-editable .form-control[name=fp_id] {
+    width: 22rem;
+}
+
+.table-editable td > .form-control[name=counseling_place_id] {
+    margin-bottom: 0;
+}
+
+.table-editable .form-control[name=family_restaurant_distance] {
+    width: 5rem;
+}
+
+.table-editable .input-group-addon[data-name=kilometer] {
+    width: auto;
+    align-items: flex-end;
+}
+
+.table-editable .btn-group[data-type=contact_type_id] > .btn {
+    width: 70px;
+}
+
+.table-editable .checkbox > label {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.table-editable .checkbox > label > * {
+    width: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.table-editable .checkbox > label > input {
+    margin-right: 0.25rem;
+}
+
+.table-editable td > label {
+    margin: 0 .25rem 0 0;
+}
+
+.table-editable td > label > input {
+    margin-right: .125rem;
+}
+
+.table-editable td > label > input:first-child {
+    margin-left: .125rem;
+}
+
+.table-editable .group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.table-editable input[readonly] {
+    cursor: not-allowed;
+}
+
+.action-button {
+    display: flex;
+}
+
+.action-button .btn:not(:last-child){
+    margin-right: .25rem;
+}
+
+.form-control[readonly],
+.table[readonly] {
+    background-color: #f5f5f5 !important;
+}
+
+.table[readonly] th,
+.table[readonly] td {
+    border-color: #ced4da;
+}
+
+.selected-family-restaurant input {
+    background-color: transparent;
+}
+
+.selected-family-restaurant:not(.selected) th,
+.selected-family-restaurant:not(.selected) td {
+    border-color: rgb(231, 174, 178);
+}
+
+.table-plane th,
+.table-plane td {
+    padding: .5rem .75rem;
+}
