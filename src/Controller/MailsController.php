@@ -22,7 +22,7 @@ class MailsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Students'],
+            'contain' => ['MailTypes','Students'],
             'limit' => 50,
         ];
 
@@ -42,7 +42,7 @@ class MailsController extends AppController
     public function view($id = null)
     {
         $mail = $this->Mails->get($id, [
-            'contain' => ['Students']
+            'contain' => ['MailTemplates','MailTypes','Students']
         ]);
 
         $this->set('mail', $mail);
@@ -84,7 +84,7 @@ class MailsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $mail = $this->Mails->patchEntity($mail, $this->request->getData());
             if ($this->Mails->save($mail)) {
-                $this->Flash->success(__('The mail has been saved.'));
+                $this->Flash->success(__('メール情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

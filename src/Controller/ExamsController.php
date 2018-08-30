@@ -75,7 +75,7 @@ class ExamsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $exam = $this->Exams->patchEntity($exam, $this->request->getData());
             if ($this->Exams->save($exam)) {
-                $this->Flash->success(__('The exam has been saved.'));
+                $this->Flash->success(__('試験情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

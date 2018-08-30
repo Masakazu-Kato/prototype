@@ -15,26 +15,28 @@ class MailsTable extends Table
 {
 
     protected static $_translationTable = [
-        'id'            => 'ID',
-        'student_id'    => '受講者ID',
-        'user_id'       => 'ユーザーID',
-        'subject'       => '題名',
-        'type'          => 'タイプ',
-        'from'          => 'From',
-        'to'            => 'To',
-        'cc'            => 'Cc',
-        'bcc'           => 'Bcc',
-        'body'          => '内容',
-        'raw'           => 'オリジナル',
-        'status'        => 'ステータス',
-        'mail_type_id'  => 'タイプID',
-        'error_code'    => 'エラーコード',
-        'enable'        => '有効・無効',
-        'created'       => '作成日',
-        'modified'      => '更新日',
+        'id'               => 'ID',
+        'student_id'       => '受講者ID',
+        'user_id'          => 'ユーザーID',
+        'subject'          => '題名',
+        'mail_type_id'     => 'メールタイプID',
+        'from'             => 'From',
+        'to'               => 'To',
+        'cc'               => 'Cc',
+        'bcc'              => 'Bcc',
+        'body'             => '内容',
+        'raw'              => 'オリジナル',
+        'status'           => 'ステータス',
+        'mail_template_id' => 'タイプID',
+        'error_code'       => 'エラーコード',
+        'enable'           => '有効・無効',
+        'created'          => '作成日',
+        'modified'         => '更新日',
 
-        'student'       => '受講者',
-        'user'          => 'ユーザー'
+        'student'          => '受講者',
+        'user'             => 'ユーザー',
+        'mail_type'        => 'メールタイプ',
+        'mail_template'    => 'メールテンプレート',
 
     ];
 
@@ -54,21 +56,23 @@ class MailsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-
+        $this->belongsTo('MailTemplates', [
+            'foreignKey' => 'mail_template_id',
+            'joinType' => 'LEFT'
+        ]);
+        $this->belongsTo('MailTypes', [
+            'foreignKey' => 'mail_type_id',
+            'joinType' => 'LEFT'
+        ]);
         $this->belongsTo('Students', [
             'foreignKey' => 'student_id',
             'joinType' => 'LEFT'
         ]);
-
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'LEFT'
         ]);
 
-        $this->belongsTo('MailTypes', [
-            'foreignKey' => 'mail_type_id',
-            'joinType' => 'INNER'
-        ]);
     }
 
     /**
@@ -88,11 +92,6 @@ class MailsTable extends Table
             ->maxLength('subject', 255)
             ->requirePresence('subject', 'create')
             ->notEmpty('subject');
-
-        $validator
-            ->integer('type')
-            ->requirePresence('type', 'create')
-            ->notEmpty('type');
 
         $validator
             ->scalar('from')
@@ -153,9 +152,10 @@ class MailsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['mail_template_id'], 'MailTemplates'));
+        $rules->add($rules->existsIn(['mail_type_id'], 'MailTypes'));
         $rules->add($rules->existsIn(['student_id'], 'Students'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['mail_type_id'], 'MailTypes'));
 
         return $rules;
     }

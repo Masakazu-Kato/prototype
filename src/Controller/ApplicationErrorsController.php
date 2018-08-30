@@ -86,7 +86,7 @@ class ApplicationErrorsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $applicationError = $this->ApplicationErrors->patchEntity($applicationError, $this->request->getData());
             if ($this->ApplicationErrors->save($applicationError)) {
-                $this->Flash->success(__('The application error has been saved.'));
+                $this->Flash->success(__('エラー情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

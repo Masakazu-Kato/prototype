@@ -17,7 +17,7 @@
                     <th><?= $this->Paginator->sort('id', MailsTable::__('id')) ?></th>
                     <th><?= MailsTable::__('student') ?></th>
                     <th><?= $this->Paginator->sort('subject', MailsTable::__('subject')) ?></th>
-                    <th><?= $this->Paginator->sort('type', MailsTable::__('type')) ?></th>
+                    <th><?= $this->Paginator->sort('mail_type_id', MailsTable::__('mail_type')) ?></th>
                     <th><?= $this->Paginator->sort('to', MailsTable::__('to')) ?></th>
                     <th></th>
                 </tr>
@@ -28,7 +28,7 @@
                     <td class="text-center"><?= $this->Number->format($mail->id) ?></td>
                     <td><?= h($mail->student['full_name']) ?></td>
                     <td><?= h($mail->subject) ?></td>
-                    <td><?= h($mail->type) ?></td>
+                    <td><?= h($mail->mail_type['name']) ?? '' ?></td>
                     <td><?= h($mail->to) ?></td>
                     <td class="action">
                         <?= $this->Html->link('<span class="glyphicon glyphicon-chevron-right"></span>',

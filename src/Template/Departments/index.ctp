@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <?php foreach ($departments as $department): ?>
-                <tr>
+                <tr<?php if ($department->enable !== 1) echo ' class="table-active"' ?>>
                     <td class="text-center"><?= $this->Number->format($department->id) ?></td>
                     <td><?= h($department->name) ?></td>
                     <td><?= h($enable[$department->enable]) ?></td>

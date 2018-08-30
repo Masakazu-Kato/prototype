@@ -29,7 +29,6 @@ class UsersSeed extends AbstractSeed
                 'lastname_kana' => $faker->lastKanaName,
                 'firstname_kana' => $faker->firstKanaName(null),
                 'email' => $i.$faker->safeEmail,
-
                 'phone' => $faker->phoneNumber,
                 'postcode' => $faker->postcode,
                 'prefecture_id' => $faker->numberBetween(1,47),
@@ -37,7 +36,6 @@ class UsersSeed extends AbstractSeed
                 'street' => $faker->streetAddress,
                 'building' => $faker->numberBetween(10000,20000),
                 'birthday' => $faker->dateTimeBetween('-80 years', '-20years')->format('Y-m-d'),
-
                 'enable' => $faker->boolean,
                 'token' => $faker->sha256,
                 'created' => date('Y-m-d H:i:s'),

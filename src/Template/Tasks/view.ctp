@@ -78,6 +78,30 @@
     <div class="col-md-3">
         <section class="content sandbox">
             <div class="sheet">
+                <?php if ($task->user): ?>
+                <table class="table table-bordered table-plane">
+                    <tr>
+                        <th><?= $task->user['id'] ?></th>
+                        <td><?= h($task->user['full_name']) ?? '' ?></td>
+                    </tr>
+                </table>
+                <?php endif ?>
+                <?php if ($task->student): ?>
+                <table class="table table-bordered table-plane">
+                    <tr>
+                        <th><?= $task->student['id'] ?></th>
+                        <td><?= h($task->student['full_name']) ?? '' ?></td>
+                    </tr>
+                </table>
+                <?php endif ?>
+                <?php if ($task->assign): ?>
+                <table class="table table-bordered table-plane">
+                    <tr>
+                        <th><?= $task->assign['id'] ?></th>
+                        <td><?= h($task->assign['full_name']) ?? '' ?></td>
+                    </tr>
+                </table>
+                <?php endif ?>
             </div>
         </section>
     </div>

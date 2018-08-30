@@ -22,6 +22,8 @@
                     <th><?= TasksTable::__('student') ?></th>
                     <th><?= TasksTable::__('assign') ?></th>
 
+                    <th><?= TasksTable::__('task_status') ?></th>
+
                     <th><?= $this->Paginator->sort('created', TasksTable::__('created')) ?></th>
                     <th><?= $this->Paginator->sort('modified', TasksTable::__('modified')) ?></th>
                     <th></th>
@@ -29,7 +31,7 @@
             </thead>
             <tbody>
                 <?php foreach ($tasks as $task): ?>
-                <tr>
+                <tr<?php if (in_array($task->task_status_id,[3,4],true)) echo ' class="table-active"' ?>>
                     <td class="text-center"><?= $this->Number->format($task->id) ?></td>
                     <td><?= h($task->name) ?></td>
                     <td><?= h($task->text) ?></td>
@@ -38,6 +40,8 @@
                     <td><?= h($task->student['full_name']) ?></td>
                     <td><?= h($task->assign['full_name']) ?></td>
 
+
+                    <td><?= h($task->task_status['name']) ?></td>
                     <td><?= h($task->created->i18nFormat('yyyy年M月d日 HH:mm:ss')) ?></td>
                     <td><?= h($task->modified->i18nFormat('yyyy年M月d日 HH:mm:ss')) ?></td>
                     <td class="action">

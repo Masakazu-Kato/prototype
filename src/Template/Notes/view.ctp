@@ -62,6 +62,22 @@
     <div class="col-md-3">
         <section class="content sandbox">
             <div class="sheet">
+                <?php if ($note->user): ?>
+                <table class="table table-bordered table-plane">
+                    <tr>
+                        <th><?= $note->user['id'] ?></th>
+                        <td><?= h($note->user['full_name']) ?? '' ?></td>
+                    </tr>
+                </table>
+                <?php endif ?>
+                <?php if ($note->student): ?>
+                <table class="table table-bordered table-plane">
+                    <tr>
+                        <th><?= $note->student['id'] ?></th>
+                        <td><?= h($note->student['full_name']) ?? '' ?></td>
+                    </tr>
+                </table>
+                <?php endif ?>
             </div>
         </section>
     </div>

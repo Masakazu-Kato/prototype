@@ -18,7 +18,7 @@ class TasksSeed extends AbstractSeed
      */
     public function run()
     {
-        $count = 10000;
+        $count = 1000;
         $faker = Faker\Factory::create('ja_JP');
         for ($i = 0; $i < $count; $i++) {
             $data[] = [

@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <?php foreach ($mailTemplates as $mailTemplate): ?>
-                <tr>
+                <tr<?php if ($mailTemplate->enable !== 1) echo ' class="table-active"' ?>>
                     <td class="text-center"><?= $this->Number->format($mailTemplate->id) ?></td>
                     <td><?= h($mailTemplate->name) ?></td>
                     <td><?= h($enable[$mailTemplate->enable]) ?></td>

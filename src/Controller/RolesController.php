@@ -85,7 +85,7 @@ class RolesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
-                $this->Flash->success(__('The role has been saved.'));
+                $this->Flash->success(__('役割情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

@@ -8,6 +8,11 @@ $_name = strtolower($this->name);
     <li<?php if ($_name === 'prefectures') echo ' class="active"' ?>>
         <a href="/settings/prefectures/">都道府県</a>
     </li>
+
+    <li<?php if ($_name === 'mailtypes') echo ' class="active"' ?>>
+        <a href="/settings/mail-types/">メールタイプ</a>
+    </li>
+
     <li<?php if ($_name === 'applications') echo ' class="active"' ?>>
         <a href="/settings/applications/">API</a>
     </li>

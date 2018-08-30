@@ -26,7 +26,7 @@ class Mails extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('type', 'integer', [
+        $table->addColumn('mail_type_id', 'integer', [
             'default' => 0,
             'null' => false,
         ]);
@@ -62,7 +62,7 @@ class Mails extends AbstractMigration
             'default' => 0,
             'null' => false,
         ]);
-        $table->addColumn('mail_type_id', 'integer', [
+        $table->addColumn('mail_template_id', 'integer', [
             'default' => 0,
             'null' => false,
         ]);
@@ -87,6 +87,7 @@ class Mails extends AbstractMigration
         $table->addIndex(['student_id'])
               ->addIndex(['user_id'])
               ->addIndex(['mail_type_id'])
+              ->addIndex(['mail_template_id'])
               ->update();
     }
 }

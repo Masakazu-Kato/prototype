@@ -7,8 +7,9 @@ use Cake\ORM\TableRegistry;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
-use App\Controller\Component\SurveyMonkeyComponent;
+
 use App\Controller\Component\SendGridComponent;
+use App\Controller\Component\SurveyMonkeyComponent;
 
 /**
  * DefaultSet shell command.
@@ -17,12 +18,12 @@ class DefaultSetShell extends Shell
 {
 
     public function initialize() {
-        $this->SurveyMonkey = new SurveyMonkeyComponent(new ComponentRegistry());
         $this->SendGrid = new SendGridComponent(new ComponentRegistry());
+        $this->SurveyMonkey = new SurveyMonkeyComponent(new ComponentRegistry());
+
         $this->SurveyCategories = TableRegistry::get("SurveyCategories");
         $this->SurveyErrors = TableRegistry::get("SurveyErrors");
         $this->SurveyLanguages = TableRegistry::get("SurveyLanguages");
-
         $this->SendgridTemplates = TableRegistry::get("SendgridTemplates");
     }
 
@@ -70,6 +71,7 @@ class DefaultSetShell extends Shell
         }
 
         // SendGrid
+        /*
         $response = $this->SendGrid->get('templates');
         foreach ($response['templates'] as $key => $value) {
             $val = $this->SendGrid->formatApiCounts($value);
@@ -77,6 +79,7 @@ class DefaultSetShell extends Shell
             $sendgridTemplate->setApiValues($val);
             $this->SendgridTemplates->save($sendgridTemplate);
         }
+        */
 
     }
 }

@@ -5,9 +5,13 @@ use Cake\Console\Shell;
 
 use Cake\Controller\Component;
 use Cake\Controller\ComponentRegistry;
-use App\Controller\Component\SurveyMonkeyComponent;
-use App\Controller\Component\SendGridComponent;
+
+
 use App\Controller\Component\BitlyComponent;
+use App\Controller\Component\LogComponent;
+use App\Controller\Component\SendGridComponent;
+use App\Controller\Component\SurveyMonkeyComponent;
+
 
 /**
  * Test shell command.
@@ -16,9 +20,12 @@ class TestShell extends Shell
 {
 
     public function initialize() {
-        $this->SurveyMonkey = new SurveyMonkeyComponent(new ComponentRegistry());
-        $this->SendGrid = new SendGridComponent(new ComponentRegistry());
+
         $this->Bitly = new BitlyComponent(new ComponentRegistry());
+        $this->Log = new LogComponent(new ComponentRegistry());
+        $this->SendGrid = new SendGridComponent(new ComponentRegistry());
+        $this->SurveyMonkey = new SurveyMonkeyComponent(new ComponentRegistry());
+
     }
 
     /**
@@ -63,8 +70,8 @@ class TestShell extends Shell
 
         // $response = $this->SendGrid->get('templates');
 
-        $response = $this->Bitly->get('https://www.yahoo.co.jp/');
 
-        var_dump($response);
+        $response = $this->Bitly->get('https://www.yahoo.co.jp/');
+        $this->Log->shell($response);
     }
 }

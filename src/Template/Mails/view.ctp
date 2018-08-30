@@ -30,8 +30,8 @@
                         <td><?= h($mail->subject) ?? '' ?></td>
                     </tr>
                     <tr>
-                        <th><?= MailsTable::__('type') ?></th>
-                        <td><?= h($mail->type) ?? '' ?></td>
+                        <th><?= MailsTable::__('mail_type') ?></th>
+                        <td><?= h($mail->mail_type['name']) ?? '' ?></td>
                     </tr>
                     <tr>
                         <th><?= MailsTable::__('from') ?></th>
@@ -63,8 +63,8 @@
                         <td><?= h($mail->status) ?? '' ?></td>
                     </tr>
                     <tr>
-                        <th><?= MailsTable::__('mail_type_id') ?></th>
-                        <td><?= h($mail->mail_type_id) ?? '' ?></td>
+                        <th><?= MailsTable::__('mail_template') ?></th>
+                        <td><?= h($mail->mail_template['name']) ?? '' ?></td>
                     </tr>
                     <tr>
                         <th><?= MailsTable::__('error_code') ?></th>
@@ -99,6 +99,22 @@
     <div class="col-md-3">
         <section class="content sandbox">
             <div class="sheet">
+                <?php if ($mail->student): ?>
+                <table class="table table-bordered table-plane">
+                    <tr>
+                        <th><?= $mail->student['id'] ?></th>
+                        <td><?= h($mail->student['full_name']) ?? '' ?></td>
+                    </tr>
+                </table>
+                <?php endif ?>
+                <?php if ($mail->mail_template): ?>
+                <table class="table table-bordered table-plane">
+                    <tr>
+                        <th><?= $mail->mail_template['id'] ?></th>
+                        <td><?= h($mail->mail_template['name']) ?? '' ?></td>
+                    </tr>
+                </table>
+                <?php endif ?>
             </div>
         </section>
     </div>

@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <?php foreach ($roles as $role): ?>
-                <tr>
+                <tr<?php if ($role->enable !== 1) echo ' class="table-active"' ?>>
                     <td class="text-center"><?= $this->Number->format($role->id) ?></td>
                     <td><?= h($role->name) ?></td>
                     <td><?= h($enable[$role->enable]) ?></td>

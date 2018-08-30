@@ -92,7 +92,7 @@ class SurveysController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $survey = $this->Surveys->patchEntity($survey, $this->request->getData());
             if ($this->Surveys->save($survey)) {
-                $this->Flash->success(__('The survey has been saved.'));
+                $this->Flash->success(__('アンケート情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

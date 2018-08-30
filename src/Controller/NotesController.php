@@ -82,7 +82,7 @@ class NotesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->getData());
             if ($this->Notes->save($note)) {
-                $this->Flash->success(__('The note has been saved.'));
+                $this->Flash->success(__('メモ情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

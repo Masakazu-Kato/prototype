@@ -81,7 +81,7 @@ class ShortUrlsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $shortUrl = $this->ShortUrls->patchEntity($shortUrl, $this->request->getData());
             if ($this->ShortUrls->save($shortUrl)) {
-                $this->Flash->success(__('The short url has been saved.'));
+                $this->Flash->success(__('短縮URL情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

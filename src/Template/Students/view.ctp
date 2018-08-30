@@ -97,6 +97,46 @@
     <div class="col-md-3">
         <section class="content sandbox">
             <div class="sheet">
+                <?php if ($student->mails): ?>
+                <table class="table table-bordered table-plane">
+                    <?php foreach ($student->mails as $key => $mail): ?>
+                    <tr>
+                        <th><?= $mail->id ?></th>
+                        <td><?= h($mail->subject) ?? '' ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php endif ?>
+                <?php if ($student->notes): ?>
+                <table class="table table-bordered table-plane">
+                    <?php foreach ($student->notes as $key => $note): ?>
+                    <tr>
+                        <th><?= $note->id ?></th>
+                        <td><?= h($note->name) ?? '' ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php endif ?>
+                <?php if ($student->short_messages): ?>
+                <table class="table table-bordered table-plane">
+                    <?php foreach ($student->short_messages as $key => $short_message): ?>
+                    <tr>
+                        <th><?= $short_message->id ?></th>
+                        <td><?= h($short_message->body) ?? '' ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php endif ?>
+                <?php if ($student->tasks): ?>
+                <table class="table table-bordered table-plane">
+                    <?php foreach ($student->tasks as $key => $task): ?>
+                    <tr>
+                        <th><?= $task->id ?></th>
+                        <td><?= h($task->name) ?? '' ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+                <?php endif ?>
             </div>
         </section>
     </div>

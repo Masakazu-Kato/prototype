@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 <?php foreach ($applications as $application): ?>
-                <tr>
+                <tr<?php if ($application->enable !== 1) echo ' class="table-active"' ?>>
                     <td class="text-center"><?= $this->Number->format($application->id) ?></td>
                     <td><?= h($application->name) ?></td>
                     <td><?= h($enable[$application->enable]) ?></td>

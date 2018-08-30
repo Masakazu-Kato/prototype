@@ -18,14 +18,14 @@ class MailsSeed extends AbstractSeed
      */
     public function run()
     {
-        $count = 10000;
+        $count = 1000;
         $faker = Faker\Factory::create('ja_JP');
         for ($i = 0; $i < $count; $i++) {
             $data[] = [
                 'student_id' => $i,
                 'user_id' => $i,
                 'subject' => 'メール (Mails) [ '.$i.' ]',
-                'type' => $faker->numberBetween(1,2),
+                'mail_type_id' => $faker->numberBetween(1,2),
                 'from' => $i.$faker->safeEmail,
                 'to' => $i.$faker->safeEmail,
                 'cc' => $i.$faker->safeEmail,
@@ -33,7 +33,7 @@ class MailsSeed extends AbstractSeed
                 'body' => $faker->realText($faker->numberBetween(20,100)),
                 'raw' => $faker->realText($faker->numberBetween(20,100)),
                 'status' => $faker->boolean,
-                'mail_type_id' => $faker->numberBetween(1,4),
+                'mail_template_id' => $i,
                 'error_code' => $faker->randomElement([200,500]),
                 'enable' => $faker->boolean,
                 'created' => date('Y-m-d H:i:s'),

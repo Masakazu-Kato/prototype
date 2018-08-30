@@ -84,7 +84,7 @@ class DepartmentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $department = $this->Departments->patchEntity($department, $this->request->getData());
             if ($this->Departments->save($department)) {
-                $this->Flash->success(__('The department has been saved.'));
+                $this->Flash->success(__('部門情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

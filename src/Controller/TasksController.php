@@ -21,7 +21,7 @@ class TasksController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Assigns', 'Students', 'Users'],
+            'contain' => ['Assigns', 'Students', 'TaskStatuses', 'Users'],
             'limit' => 50,
         ];
         $tasks = $this->paginate($this->Tasks);
@@ -83,7 +83,7 @@ class TasksController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
+                $this->Flash->success(__('タスク情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

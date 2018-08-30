@@ -81,7 +81,7 @@ class SendgridTemplatesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $sendgridTemplate = $this->SendgridTemplates->patchEntity($sendgridTemplate, $this->request->getData());
             if ($this->SendgridTemplates->save($sendgridTemplate)) {
-                $this->Flash->success(__('The sendgrid template has been saved.'));
+                $this->Flash->success(__('SendGridテンプレート情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

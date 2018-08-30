@@ -85,7 +85,7 @@ class MailTemplatesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $mailTemplate = $this->MailTemplates->patchEntity($mailTemplate, $this->request->getData());
             if ($this->MailTemplates->save($mailTemplate)) {
-                $this->Flash->success(__('The mail template has been saved.'));
+                $this->Flash->success(__('メールテンプレート情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

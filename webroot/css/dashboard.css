@@ -254,6 +254,11 @@ main > .row,
     padding: 15px;
 }
 
+main > .row,
+*[role=main] > .row {
+    height: 100%;
+}
+
 main > .content > .sheet,
 *[role=main] > .content > .sheet,
 .sheet {

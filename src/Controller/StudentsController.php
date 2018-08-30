@@ -84,7 +84,7 @@ class StudentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $student = $this->Students->patchEntity($student, $this->request->getData());
             if ($this->Students->save($student)) {
-                $this->Flash->success(__('The student has been saved.'));
+                $this->Flash->success(__('受講者情報を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }

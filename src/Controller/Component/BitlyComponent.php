@@ -35,7 +35,26 @@ class BitlyComponent extends Component
      */
     public function get(string $url)
     {
-        return $this->_fetch($url);
+        $this->loadModel('ShortUrls');
+
+        $response = $this->_fetch($url);
+
+                $connection = ConnectionManager::get('default');
+                try {
+                    $connection->begin();
+                    $value = $this->__formatShortUrl($content);
+                    $shortUrl = $this->ShortUrls->newEntity();
+                    $shortUrl->setApiValues($value);
+                    $this->ShortUrls->save($shortUrl);
+                    $connection->commit();
+                } catch (\Exception $e) {
+                    $connection->rollback();
+                    $this->Log->api($e);
+                }
+
+
+        return $response;
+
     }
 
     /**
@@ -46,8 +65,6 @@ class BitlyComponent extends Component
      */
     private function _fetch(string $url)
     {
-
-        $this->loadModel('ShortUrls');
 
         $url = Configure::read("Api.bitly.baseurl").'?access_token='.
                 Configure::read("Api.bitly.access_token").'&longUrl='.$url;
@@ -62,19 +79,6 @@ class BitlyComponent extends Component
 
         switch($statusCode) {
             case 200:
-                $connection = ConnectionManager::get('default');
-
-                try {
-                    $connection->begin();
-                    $value = $this->__formatShortUrl($content);
-                    $shortUrl = $this->ShortUrls->newEntity();
-                    $shortUrl->setApiValues($value);
-                    $this->ShortUrls->save($shortUrl);
-                    $connection->commit();
-                } catch (\Exception $e) {
-                    $connection->rollback();
-                    $this->Log->api($e);
-                }
                 break;
             default:
                 throw new \Exception('データの取得に失敗しました');
