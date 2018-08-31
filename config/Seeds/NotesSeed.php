@@ -24,8 +24,8 @@ class NotesSeed extends AbstractSeed
             $data[] = [
                 'name' => 'ノート (Notes) [ '.$i.' ]',
                 'text' => $faker->realText(($faker->numberBetween(20,30))),
-                'user_id' => $i,
-                'student_id' => $i,
+                'user_id' => $faker->numberBetween(1,100),
+                'student_id' => $faker->numberBetween(1,100),
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s'),
             ];

@@ -1,12 +1,13 @@
 <?php echo $this->Html->css('users.css', ['block' => 'css']) ?>
+<?php echo $this->Html->script('surveys/app.js', ['block' => 'script']) ?>
 <?php use \App\Model\Table\SurveysTable ?>
 <section class="header">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><i class="fas fa-question-circle"></i>アンケート</li>
     </ol>
-    <a href="/students/add" class="btn btn-primary btn-sm">
-        <i class="glyphicon glyphicon-plus"></i>追加
-    </a>
+    <button class="btn btn-success btn-sm">
+        <i class="glyphicon glyphicon-plus"></i>リスト更新
+    </button>
 </section>
 <section class="content">
     <?php if ($surveys): ?>

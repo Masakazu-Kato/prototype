@@ -27,11 +27,12 @@ class Task extends Entity
         'assign_id' => true,
         'student_id' => true,
         'assigned' => true,
-        'processed' => true,
+        'task_status_id' => true,
         'created' => true,
         'modified' => true,
         'user' => true,
         'assign' => true,
-        'student' => true
+        'student' => true,
+        'task_status' => true
     ];
 }

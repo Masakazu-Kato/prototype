@@ -8,6 +8,9 @@ switch ($_name) {
     case 'home':
         $_active = 'index';
         break;
+    case 'exams':
+        $_active = 'exams';
+        break;
     case 'surveys':
         $_active = 'surveys';
         break;
@@ -72,7 +75,12 @@ switch ($_name) {
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link<?php if ($_active === 'surveys') echo ' active' ?>" href="/surveys/">
+                <a class="nav-link<?php if ($_active === 'exams') echo ' active' ?>" href="/exams/?sort=id&direction=desc">
+                    <i class="fas fa-graduation-cap"></i>試験
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link<?php if ($_active === 'surveys') echo ' active' ?>" href="/surveys/?sort=id&direction=desc">
                     <i class="fas fa-question-circle"></i>アンケート
                 </a>
             </li>
@@ -123,7 +131,7 @@ switch ($_name) {
                     <i class="fas fa-user"></i>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/users/view">マイページ</a>
+                    <a class="dropdown-item" href="/users/view"><?= $currentUser->full_name ?>さんのマイページ</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/users/signout">ログアウト</a>
                 </div>

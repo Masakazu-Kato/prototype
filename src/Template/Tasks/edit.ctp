@@ -75,6 +75,7 @@
                         'templates' => ['inputContainer' => '{{content}}'],
                         'label' => false,
                         'class' => 'form-control',
+                        'options' => $users
                     ]) ?>
                 </td>
             </tr>
@@ -85,6 +86,7 @@
                         'templates' => ['inputContainer' => '{{content}}'],
                         'label' => false,
                         'class' => 'form-control',
+                        'options' => $students
                     ]) ?>
                 </td>
             </tr>
@@ -95,6 +97,7 @@
                         'templates' => ['inputContainer' => '{{content}}'],
                         'label' => false,
                         'class' => 'form-control',
+                        'options' => $assigns
                     ]) ?>
                 </td>
             </tr>
@@ -105,7 +108,7 @@
                         'templates' => ['inputContainer' => '{{content}}'],
                         'label' => false,
                         'class' => 'form-control',
-                        'options' => $task_status
+                        'options' => $taskStatuses
                     ]) ?>
                 </td>
             </tr>

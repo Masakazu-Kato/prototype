@@ -19,11 +19,11 @@ class UsersSeed extends AbstractSeed
      */
     public function run()
     {
-        $count = 1000;
+        $count = 100;
         $faker = Faker\Factory::create('ja_JP');
         for ($i = 0; $i < $count; $i++) {
             $data[] = [
-                'password' => $this->_setPassword(0000),
+                'password' => $this->_setPassword('0000'),
                 'lastname' => $faker->lastName,
                 'firstname' => $faker->firstName,
                 'lastname_kana' => $faker->lastKanaName,

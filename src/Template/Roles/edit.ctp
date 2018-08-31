@@ -1,5 +1,5 @@
 <?php echo $this->Html->css('applications.css', ['block' => 'css']) ?>
-<?php echo $this->Html->script('mail_templates/edit.js?' . time(), ['block' => 'script']) ?>
+<?php echo $this->Html->script('roles/edit.js?' . time(), ['block' => 'script']) ?>
 <?php use \App\Model\Table\RolesTable ?>
 <section class="header">
     <ol class="breadcrumb">

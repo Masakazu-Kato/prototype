@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Event\Event;
+use Cake\Event\EventDispatcherTrait;
+
 /**
  * Tasks Controller
  *
@@ -12,6 +15,11 @@ use App\Controller\AppController;
  */
 class TasksController extends AppController
 {
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+    }
 
     /**
      * Index method
@@ -25,7 +33,6 @@ class TasksController extends AppController
             'limit' => 50,
         ];
         $tasks = $this->paginate($this->Tasks);
-
         $this->set(compact('tasks'));
     }
 
@@ -41,7 +48,6 @@ class TasksController extends AppController
         $task = $this->Tasks->get($id, [
             'contain' => ['Assigns', 'Students', 'TaskStatuses', 'Users']
         ]);
-
         $this->set('task', $task);
     }
 
@@ -56,16 +62,24 @@ class TasksController extends AppController
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
-
+                $this->Flash->success(__('タスクを追加しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('タスクの追加に失敗しました。もう一度やり直してください。'));
         }
-        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
-        $assigns = $this->Tasks->Assigns->find('list', ['limit' => 200]);
-        $students = $this->Tasks->Students->find('list', ['limit' => 200]);
-        $this->set(compact('task', 'users', 'assigns', 'students'));
+        $users = $this->Tasks->Users->find('list', [
+            'limit' => 200
+        ]);
+        $assigns = $this->Tasks->Assigns->find('list', [
+            'limit' => 200
+        ]);
+        $students = $this->Tasks->Students->find('list', [
+            'limit' => 200
+        ]);
+        $taskStatuses = $this->Tasks->TaskStatuses->find('list', [
+            'limit' => 200
+        ]);
+        $this->set(compact('task', 'users', 'assigns', 'students', 'taskStatuses'));
     }
 
     /**
@@ -83,16 +97,24 @@ class TasksController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('タスク情報を更新しました。'));
-
+                $this->Flash->success(__('タスクを更新しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The task could not be saved. Please, try again.'));
+            $this->Flash->error(__('タスクの更新に失敗しました。もう一度やり直してください。'));
         }
-        $users = $this->Tasks->Users->find('list', ['limit' => 200]);
-        $assigns = $this->Tasks->Assigns->find('list', ['limit' => 200]);
-        $students = $this->Tasks->Students->find('list', ['limit' => 200]);
-        $this->set(compact('task', 'users', 'assigns', 'students'));
+        $users = $this->Tasks->Users->find('list', [
+            'limit' => 200
+        ]);
+        $assigns = $this->Tasks->Assigns->find('list', [
+            'limit' => 200
+        ]);
+        $students = $this->Tasks->Students->find('list', [
+            'limit' => 200
+        ]);
+        $taskStatuses = $this->Tasks->TaskStatuses->find('list', [
+            'limit' => 200
+        ]);
+        $this->set(compact('task', 'users', 'assigns', 'students', 'taskStatuses'));
     }
 
     /**
@@ -107,11 +129,10 @@ class TasksController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $task = $this->Tasks->get($id);
         if ($this->Tasks->delete($task)) {
-            $this->Flash->success(__('The task has been deleted.'));
+            $this->Flash->success(__('タスクを削除しました。'));
         } else {
-            $this->Flash->error(__('The task could not be deleted. Please, try again.'));
+            $this->Flash->error(__('タスクの削除に失敗しました。もう一度やり直してください。'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

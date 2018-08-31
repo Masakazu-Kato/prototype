@@ -1,10 +1,10 @@
 <?php echo $this->Html->css('applications.css', ['block' => 'css']) ?>
-<?php echo $this->Html->script('students/edit.js?' . time(), ['block' => 'script']) ?>
+<?php echo $this->Html->script('students/edit.js', ['block' => 'script']) ?>
 <?php use \App\Model\Table\StudentsTable ?>
 <section class="header">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><i class="fas fa-cog"></i>設定管理</li>
-        <li class="breadcrumb-item"><a href="/mails/">メール</a></li>
+        <li class="breadcrumb-item"><i class="fas fa-user"></i>受講者</li>
+        <li class="breadcrumb-item"><a href="/students/">一覧</a></li>
         <li class="breadcrumb-item active">編集</li>
     </ol>
 </section>

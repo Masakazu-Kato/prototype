@@ -19,6 +19,9 @@ use Cake\Event\Event;
 use App\Model\Entity\User;
 use App\Model\Table\UsersTable;
 
+use App\Model\Entity\Student;
+use App\Model\Table\StudentsTable;
+
 /**
  * Application Controller
  *
@@ -56,8 +59,8 @@ class AppController extends Controller
             'enableBeforeRedirect' => false,
         ]);
         $this->loadComponent('Flash');
-        // $this->_initAuthComponent();
-        // $this->_initCurrentUser();
+        $this->_initAuthComponent();
+        $this->_initCurrentUser();
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
@@ -93,8 +96,6 @@ class AppController extends Controller
 
         if ($user) {
             $user = new User($user);
-            $vendor = $user->getVendor();
-            if ($vendor !== null) $user->vendor = $vendor;
             $this->set('currentUser', $user);
         }
 

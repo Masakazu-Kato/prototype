@@ -13,6 +13,11 @@ class Students extends AbstractMigration
     public function change()
     {
         $table = $this->table('students');
+        $table->addColumn('password', 'string', [
+            'default' => null,
+            'limit' => 255,
+            'null' => false,
+        ]);
         $table->addColumn('lastname', 'string', [
             'default' => null,
             'limit' => 16,

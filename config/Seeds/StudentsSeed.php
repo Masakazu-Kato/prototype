@@ -1,5 +1,6 @@
 <?php
 use Migrations\AbstractSeed;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Students seed.
@@ -18,24 +19,23 @@ class StudentsSeed extends AbstractSeed
      */
     public function run()
     {
-        $count = 1000;
+        $count = 100;
         $faker = Faker\Factory::create('ja_JP');
         for ($i = 0; $i < $count; $i++) {
             $data[] = [
+                'password' => $this->_setPassword('0000'),
                 'lastname' => $faker->lastName,
                 'firstname' => $faker->firstName,
                 'lastname_kana' => $faker->lastKanaName,
                 'firstname_kana' => $faker->firstKanaName(null),
                 'email' => $i.$faker->safeEmail,
                 'phone' => $faker->phoneNumber,
-
                 'postcode' => $faker->postcode,
                 'prefecture_id' => $faker->numberBetween(1,47),
                 'municipality' =>  $faker->city,
                 'street' => $faker->streetAddress,
                 'building' => $faker->numberBetween(10000,20000),
                 'birthday' => $faker->dateTimeBetween('-80 years', '-20years')->format('Y-m-d'),
-
                 'enable' => $faker->boolean,
                 'token' => $faker->sha256,
                 'created' => date('Y-m-d H:i:s'),
@@ -46,4 +46,16 @@ class StudentsSeed extends AbstractSeed
         $table = $this->table('students');
         $table->insert($data)->save();
     }
+
+    /**
+     *
+     * @param type $value
+     * @return type
+     */
+    protected function _setPassword($value)
+    {
+        $hasher = new DefaultPasswordHasher();
+        return $hasher->hash($value);
+    }
+
 }

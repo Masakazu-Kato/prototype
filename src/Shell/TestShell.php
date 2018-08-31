@@ -64,14 +64,14 @@ class TestShell extends Shell
         // $response = $this->SurveyMonkey->get('errors');
 
         // Surveys リスト取得
-        // $response = $this->SurveyMonkey->setSurveys();
+        $response = $this->SurveyMonkey->setSurveys();
 
         // $response = $this->SurveyMonkey->setSurveyDetails();
 
         // $response = $this->SendGrid->get('templates');
 
 
-        $response = $this->Bitly->get('https://www.yahoo.co.jp/');
+        // $response = $this->Bitly->get('https://www.yahoo.co.jp/');
         $this->Log->shell($response);
     }
 }

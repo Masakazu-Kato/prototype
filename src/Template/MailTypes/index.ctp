@@ -5,9 +5,6 @@
         <li class="breadcrumb-item"><i class="fas fa-cog"></i>設定管理</li>
         <li class="breadcrumb-item active">メールタイプ</li>
     </ol>
-    <a href="/mailTemplates/add" class="btn btn-primary btn-sm">
-        <i class="glyphicon glyphicon-plus"></i>追加
-    </a>
 </section>
 <section class="content">
     <?php if ($mailTypes): ?>
@@ -17,7 +14,6 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id', MailTypesTable::__('id')) ?></th>
                     <th><?= $this->Paginator->sort('name', MailTypesTable::__('name')) ?></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>

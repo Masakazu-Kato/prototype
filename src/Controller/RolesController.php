@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Event\Event;
+use Cake\Event\EventDispatcherTrait;
+
 /**
  * Roles Controller
  *
@@ -19,6 +22,13 @@ class RolesController extends AppController
         'limit' => 50,
     ];
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->set('sidebarName', 'Settings/sidebar');
+        $this->set('enable', $this->Utility->enable());
+    }
+
     /**
      * Index method
      *
@@ -27,10 +37,7 @@ class RolesController extends AppController
     public function index()
     {
         $roles = $this->paginate($this->Roles);
-
         $this->set(compact('roles'));
-        $this->set('sidebarName', 'Settings/sidebar');
-        $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -45,9 +52,7 @@ class RolesController extends AppController
         $role = $this->Roles->get($id, [
             'contain' => ['Users']
         ]);
-
         $this->set('role', $role);
-        $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -61,11 +66,9 @@ class RolesController extends AppController
         if ($this->request->is('post')) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
-                $this->Flash->success(__('The role has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('役割を追加しました。'));
             }
-            $this->Flash->error(__('The role could not be saved. Please, try again.'));
+            $this->Flash->error(__('役割の追加に失敗しました。もう一度やり直してください。'));
         }
         $this->set(compact('role'));
     }
@@ -85,14 +88,12 @@ class RolesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $role = $this->Roles->patchEntity($role, $this->request->getData());
             if ($this->Roles->save($role)) {
-                $this->Flash->success(__('役割情報を更新しました。'));
-
+                $this->Flash->success(__('役割を更新しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The role could not be saved. Please, try again.'));
+            $this->Flash->error(__('役割の更新に失敗しました。もう一度やり直してください。'));
         }
         $this->set(compact('role'));
-         $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -107,11 +108,10 @@ class RolesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Roles->get($id);
         if ($this->Roles->delete($role)) {
-            $this->Flash->success(__('The role has been deleted.'));
+            $this->Flash->success(__('役割を削除しました。'));
         } else {
-            $this->Flash->error(__('The role could not be deleted. Please, try again.'));
+            $this->Flash->error(__('役割の削除に失敗しました。もう一度やり直してください。'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

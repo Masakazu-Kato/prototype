@@ -1,5 +1,5 @@
 <?php echo $this->Html->css('applications.css', ['block' => 'css']) ?>
-<?php echo $this->Html->script('departments/edit.js?' . time(), ['block' => 'script']) ?>
+<?php echo $this->Html->script('departments/edit.js', ['block' => 'script']) ?>
 <?php use \App\Model\Table\DepartmentsTable ?>
 <section class="header">
     <ol class="breadcrumb">
@@ -39,14 +39,6 @@
                         'options' => $enable
                     ]) ?>
                 </td>
-            </tr>
-            <tr>
-                <th><?= DepartmentsTable::__('created') ?></th>
-                <td><?= h($department->created->i18nFormat('yyyy年M月d日 HH:mm:ss')) ?></td>
-            </tr>
-            <tr>
-                <th><?= DepartmentsTable::__('modified') ?></th>
-                <td><?= h($department->modified->i18nFormat('yyyy年M月d日 HH:mm:ss')) ?></td>
             </tr>
         </table>
         <div class="action-button">

@@ -24,12 +24,12 @@ class ShortUrlsTable extends Table
         'global_hash' => 'グローバルハッシュ値',
         'new_hash'    => '新規発行',
         'student_id'  => '受講者ID',
-        'survey_id'   => '試験ID',
+        'survey_id'   => 'アンケートID',
         'created'     => '作成日',
         'modified'    => '更新日',
 
         'student'     => '受講者',
-        'survey'      => '試験',
+        'survey'      => 'アンケート',
 
     ];
 

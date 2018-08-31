@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Event\Event;
+use Cake\Event\EventDispatcherTrait;
+
 /**
  * Exams Controller
  *
@@ -12,6 +15,11 @@ use App\Controller\AppController;
 class ExamsController extends AppController
 {
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+    }
+
     /**
      * Index method
      *
@@ -19,8 +27,11 @@ class ExamsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Surveys'],
+            'limit' => 50,
+        ];
         $exams = $this->paginate($this->Exams);
-
         $this->set(compact('exams'));
     }
 
@@ -34,9 +45,8 @@ class ExamsController extends AppController
     public function view($id = null)
     {
         $exam = $this->Exams->get($id, [
-            'contain' => []
+            'contain' => ['Prefectures','Surveys']
         ]);
-
         $this->set('exam', $exam);
     }
 
@@ -51,13 +61,18 @@ class ExamsController extends AppController
         if ($this->request->is('post')) {
             $exam = $this->Exams->patchEntity($exam, $this->request->getData());
             if ($this->Exams->save($exam)) {
-                $this->Flash->success(__('The exam has been saved.'));
-
+                $this->Flash->success(__('試験を追加しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The exam could not be saved. Please, try again.'));
+            $this->Flash->error(__('試験の追加に失敗しました。もう一度やり直してください。'));
         }
-        $this->set(compact('exam'));
+        $prefectures = $this->Exams->Prefectures->find('list', [
+            'limit' => 200
+        ]);
+        $surveys = $this->Exams->Surveys->find('list', [
+            'limit' => 200
+        ]);
+        $this->set(compact('exam','prefectures','surveys'));
     }
 
     /**
@@ -75,13 +90,19 @@ class ExamsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $exam = $this->Exams->patchEntity($exam, $this->request->getData());
             if ($this->Exams->save($exam)) {
-                $this->Flash->success(__('試験情報を更新しました。'));
-
+                $this->Flash->success(__('試験を更新しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The exam could not be saved. Please, try again.'));
+            $this->Flash->error(__('試験の更新に失敗しました。もう一度やり直してください。'));
         }
-        $this->set(compact('exam'));
+        $prefectures = $this->Exams->Prefectures->find('list', [
+            'limit' => 200
+        ]);
+        $surveys = $this->Exams->Surveys->find('list', [
+            'limit' => 200
+        ]);
+
+        $this->set(compact('exam','prefectures','surveys'));
     }
 
     /**
@@ -96,11 +117,10 @@ class ExamsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $exam = $this->Exams->get($id);
         if ($this->Exams->delete($exam)) {
-            $this->Flash->success(__('The exam has been deleted.'));
+            $this->Flash->success(__('試験を削除しました。'));
         } else {
-            $this->Flash->error(__('The exam could not be deleted. Please, try again.'));
+            $this->Flash->error(__('試験の削除に失敗しました。もう一度やり直してください。'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

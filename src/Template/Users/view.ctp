@@ -8,7 +8,7 @@
     </ol>
 </section>
 <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8">
         <section class="content sandbox">
             <div class="sheet">
                 <table class="table table-bordered table-plane">
@@ -91,7 +91,7 @@
             </div>
         </section>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <section class="content sandbox">
             <div class="sheet">
                 <?php if ($user->mails): ?>

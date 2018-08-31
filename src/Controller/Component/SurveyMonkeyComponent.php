@@ -77,20 +77,6 @@ class SurveyMonkeyComponent extends Component
 
     }
 
-    public function setSurveyDetails() {
-        $this->loadModel('Surveys');
-        $this->loadModel('SurveyPages');
-        $this->loadModel('SurveyQuestions');
-        $this->loadModel('SurveyAnswers');
-
-        $this->Surveys->setDisplayField('origin_id');
-        $data = $this->Surveys->find('list')->toArray();
-
-
-        return $response;
-
-    }
-
     // この処理で質問データ更新を行う
     public function set() {
 

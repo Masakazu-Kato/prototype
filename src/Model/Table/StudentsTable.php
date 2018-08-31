@@ -16,20 +16,19 @@ class StudentsTable extends Table
 
     protected static $_translationTable = [
         'id'             => 'ID',
+        'password'       => 'パスワード',
         'lastname'       => '姓',
         'firstname'      => '名',
         'lastname_kana'  => 'セイ',
         'firstname_kana' => 'メイ',
         'email'          => 'メールアドレス',
         'phone'          => '電話番号',
-
         'postcode'       => '郵便番号',
         'prefecture_id'  => '都道府県ID',
         'municipality'   => '市区町村',
         'street'         => '番地',
         'building'       => '建物',
         'birthday'       => '生年月日',
-
         'enable'         => '有効・無効',
         'token'          => 'トークン',
         'created'        => '作成日',
@@ -93,6 +92,12 @@ class StudentsTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
+
+        $validator
+            ->scalar('password')
+            ->maxLength('password', 255)
+            ->requirePresence('password', 'create')
+            ->notEmpty('password');
 
         $validator
             ->scalar('lastname')

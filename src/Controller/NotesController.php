@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Event\Event;
+use Cake\Event\EventDispatcherTrait;
+
 /**
  * Notes Controller
  *
@@ -12,6 +15,11 @@ use App\Controller\AppController;
  */
 class NotesController extends AppController
 {
+
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+    }
 
     /**
      * Index method
@@ -25,7 +33,6 @@ class NotesController extends AppController
             'limit' => 50
         ];
         $notes = $this->paginate($this->Notes);
-
         $this->set(compact('notes'));
     }
 
@@ -41,7 +48,6 @@ class NotesController extends AppController
         $note = $this->Notes->get($id, [
             'contain' => ['Users', 'Students']
         ]);
-
         $this->set('note', $note);
     }
 
@@ -56,14 +62,18 @@ class NotesController extends AppController
         if ($this->request->is('post')) {
             $note = $this->Notes->patchEntity($note, $this->request->getData());
             if ($this->Notes->save($note)) {
-                $this->Flash->success(__('The note has been saved.'));
+                $this->Flash->success(__('ノートを追加しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The note could not be saved. Please, try again.'));
+            $this->Flash->error(__('ノートの追加に失敗しました。もう一度やり直してください。'));
         }
-        $users = $this->Notes->Users->find('list', ['limit' => 200]);
-        $students = $this->Notes->Students->find('list', ['limit' => 200]);
+        $users = $this->Notes->Users->find('list', [
+            'limit' => 200
+        ]);
+        $students = $this->Notes->Students->find('list', [
+            'limit' => 200
+        ]);
         $this->set(compact('note', 'users', 'students'));
     }
 
@@ -82,14 +92,17 @@ class NotesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $note = $this->Notes->patchEntity($note, $this->request->getData());
             if ($this->Notes->save($note)) {
-                $this->Flash->success(__('メモ情報を更新しました。'));
-
+                $this->Flash->success(__('ノートを更新しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The note could not be saved. Please, try again.'));
+            $this->Flash->error(__('ノートの更新に失敗しました。もう一度やり直してください。'));
         }
-        $users = $this->Notes->Users->find('list', ['limit' => 200]);
-        $students = $this->Notes->Students->find('list', ['limit' => 200]);
+        $users = $this->Notes->Users->find('list', [
+            'limit' => 200
+        ]);
+        $students = $this->Notes->Students->find('list', [
+            'limit' => 200
+        ]);
         $this->set(compact('note', 'users', 'students'));
     }
 
@@ -105,11 +118,10 @@ class NotesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $note = $this->Notes->get($id);
         if ($this->Notes->delete($note)) {
-            $this->Flash->success(__('The note has been deleted.'));
+            $this->Flash->success(__('ノートを削除しました。'));
         } else {
-            $this->Flash->error(__('The note could not be deleted. Please, try again.'));
+            $this->Flash->error(__('ノートの削除に失敗しました。もう一度やり直してください。'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

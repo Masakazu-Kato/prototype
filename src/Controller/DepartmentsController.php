@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Event\Event;
+use Cake\Event\EventDispatcherTrait;
+
 /**
  * Departments Controller
  *
@@ -18,6 +21,13 @@ class DepartmentsController extends AppController
         'limit' => 50,
     ];
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->set('sidebarName', 'Settings/sidebar');
+        $this->set('enable', $this->Utility->enable());
+    }
+
     /**
      * Index method
      *
@@ -26,10 +36,7 @@ class DepartmentsController extends AppController
     public function index()
     {
         $departments = $this->paginate($this->Departments);
-
         $this->set(compact('departments'));
-        $this->set('sidebarName', 'Settings/sidebar');
-        $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -44,9 +51,7 @@ class DepartmentsController extends AppController
         $department = $this->Departments->get($id, [
             'contain' => ['Users']
         ]);
-
         $this->set('department', $department);
-        $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -60,11 +65,10 @@ class DepartmentsController extends AppController
         if ($this->request->is('post')) {
             $department = $this->Departments->patchEntity($department, $this->request->getData());
             if ($this->Departments->save($department)) {
-                $this->Flash->success(__('The department has been saved.'));
-
+                $this->Flash->success(__('部門を追加しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The department could not be saved. Please, try again.'));
+            $this->Flash->error(__('部門の追加に失敗しました。もう一度やり直してください。'));
         }
         $this->set(compact('department'));
     }
@@ -84,14 +88,13 @@ class DepartmentsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $department = $this->Departments->patchEntity($department, $this->request->getData());
             if ($this->Departments->save($department)) {
-                $this->Flash->success(__('部門情報を更新しました。'));
+                $this->Flash->success(__('部門を更新しました。'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The department could not be saved. Please, try again.'));
+            $this->Flash->error(__('部門の更新に失敗しました。もう一度やり直してください。'));
         }
         $this->set(compact('department'));
-        $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -106,11 +109,10 @@ class DepartmentsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $department = $this->Departments->get($id);
         if ($this->Departments->delete($department)) {
-            $this->Flash->success(__('The department has been deleted.'));
+            $this->Flash->success(__('部門を削除しました。'));
         } else {
-            $this->Flash->error(__('The department could not be deleted. Please, try again.'));
+            $this->Flash->error(__('部門の削除に失敗しました。もう一度やり直してください。'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

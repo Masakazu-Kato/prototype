@@ -19,20 +19,19 @@ class Student extends Entity
      * @var array
      */
     protected $_accessible = [
+        'password' => true,
         'lastname' => true,
         'firstname' => true,
         'lastname_kana' => true,
         'firstname_kana' => true,
         'email' => true,
         'phone' => true,
-
         'postcode' => true,
         'prefecture_id' => true,
         'municipality' => true,
         'street' => true,
         'building' => true,
         'birthday' => true,
-
         'enable' => true,
         'token' => true,
         'created' => true,
@@ -46,6 +45,7 @@ class Student extends Entity
      * @var array
      */
     protected $_hidden = [
+        'password',
         'token'
     ];
 
@@ -65,6 +65,13 @@ class Student extends Entity
     protected function _getFullNameKana()
     {
       return $this->_properties['lastname_kana'] . $this->_properties['firstname_kana'];
+    }
+
+    protected function _setPassword($password)
+    {
+      if (strlen($password) > 0) {
+        return (new DefaultPasswordHasher)->hash($password);
+      }
     }
 
 }

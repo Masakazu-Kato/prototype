@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Event\Event;
+use Cake\Event\EventDispatcherTrait;
+
 /**
  * MailTemplates Controller
  *
@@ -19,6 +22,13 @@ class MailTemplatesController extends AppController
         'limit' => 50,
     ];
 
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        $this->set('sidebarName', 'Settings/sidebar');
+        $this->set('enable', $this->Utility->enable());
+    }
+
     /**
      * Index method
      *
@@ -27,10 +37,7 @@ class MailTemplatesController extends AppController
     public function index()
     {
         $mailTemplates = $this->paginate($this->MailTemplates);
-
         $this->set(compact('mailTemplates'));
-        $this->set('sidebarName', 'Settings/sidebar');
-        $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -45,9 +52,7 @@ class MailTemplatesController extends AppController
         $mailTemplate = $this->MailTemplates->get($id, [
             'contain' => []
         ]);
-
         $this->set('mailTemplate', $mailTemplate);
-        $this->set('enable', $this->Utility->enable());
     }
 
     /**
@@ -61,11 +66,10 @@ class MailTemplatesController extends AppController
         if ($this->request->is('post')) {
             $mailTemplate = $this->MailTemplates->patchEntity($mailTemplate, $this->request->getData());
             if ($this->MailTemplates->save($mailTemplate)) {
-                $this->Flash->success(__('The mail template has been saved.'));
-
+                $this->Flash->success(__('メールテンプレートを追加しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The mail template could not be saved. Please, try again.'));
+            $this->Flash->error(__('メールテンプレートの追加に失敗しました。もう一度やり直してください。'));
         }
         $this->set(compact('mailTemplate'));
     }
@@ -85,11 +89,10 @@ class MailTemplatesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $mailTemplate = $this->MailTemplates->patchEntity($mailTemplate, $this->request->getData());
             if ($this->MailTemplates->save($mailTemplate)) {
-                $this->Flash->success(__('メールテンプレート情報を更新しました。'));
-
+                $this->Flash->success(__('メールテンプレートを更新しました。'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The mail template could not be saved. Please, try again.'));
+            $this->Flash->error(__('メールテンプレートの更新に失敗しました。もう一度やり直してください。'));
         }
         $this->set(compact('mailTemplate'));
         $this->set('enable', $this->Utility->enable());
@@ -107,11 +110,10 @@ class MailTemplatesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $mailTemplate = $this->MailTemplates->get($id);
         if ($this->MailTemplates->delete($mailTemplate)) {
-            $this->Flash->success(__('The mail template has been deleted.'));
+            $this->Flash->success(__('メールテンプレートを削除しました。'));
         } else {
-            $this->Flash->error(__('The mail template could not be deleted. Please, try again.'));
+            $this->Flash->error(__('メールテンプレートの削除に失敗しました。もう一度やり直してください。'));
         }
-
         return $this->redirect(['action' => 'index']);
     }
 }

@@ -1,5 +1,5 @@
 <?php echo $this->Html->css('applications.css', ['block' => 'css']) ?>
-<?php echo $this->Html->script('notes/edit.js?' . time(), ['block' => 'script']) ?>
+<?php echo $this->Html->script('notes/edit.js', ['block' => 'script']) ?>
 <?php use \App\Model\Table\NotesTable ?>
 <section class="header">
     <ol class="breadcrumb">

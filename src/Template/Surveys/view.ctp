@@ -1,4 +1,5 @@
 <?php echo $this->Html->css('applications.css', ['block' => 'css']) ?>
+<?php echo $this->Html->script('surveys/app.js', ['block' => 'script']) ?>
 <?php use App\Model\Table\SurveysTable ?>
 <section class="header">
     <ol class="breadcrumb">
@@ -6,9 +7,14 @@
         <li class="breadcrumb-item"><a href="/surveys/index?page=">一覧</a></li>
         <li class="breadcrumb-item active">詳細</li>
     </ol>
+    <button class="btn btn-success btn-sm">
+        <i class="glyphicon glyphicon-plus"></i>詳細更新
+    </button>
+    <!--
     <?php if(!$survey): ?>
     <?= $this->Form->create($survey, ['name' => 'add', 'type' => 'post', 'url' => '/students/add/2']) ?>
     <?php endif ?>
+    -->
 </section>
 <section class="content sandbox">
     <div class="sheet">

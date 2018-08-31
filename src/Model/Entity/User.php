@@ -26,7 +26,6 @@ class User extends Entity
         'lastname_kana' => true,
         'firstname_kana' => true,
         'email' => true,
-
         'phone' => true,
         'postcode' => true,
         'prefecture_id' => true,
@@ -34,7 +33,6 @@ class User extends Entity
         'street' => true,
         'building' => true,
         'birthday' => true,
-
         'enable' => true,
         'token' => true,
         'created' => true,

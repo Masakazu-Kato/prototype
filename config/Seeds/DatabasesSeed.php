@@ -42,5 +42,7 @@ class DatabasesSeed extends AbstractSeed
         $this->call('StudentSurveysSeed');
         $this->call('TaskStatusesSeed');
 
+        $this->call('ExamsSeed');
+
     }
 }
