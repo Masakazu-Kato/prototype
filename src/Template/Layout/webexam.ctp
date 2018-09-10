@@ -50,7 +50,7 @@ switch ($_name) {
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="">マイページ</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="">ログアウト</a>
+                    <a class="dropdown-item" href="/webExams/signout">ログアウト</a>
                 </div>
             </li>
         </ul>

@@ -19,16 +19,23 @@ class WebExamsController extends AppController
     public function initialize()
     {
         parent::initialize();
+        $this->loadComponent('Csrf');
+        // タイマーのみは別管理とした方がいいかも。
+        /*
         $this->Auth->allow([
             'index', 'view', 'login', 'logout',
             'app',
             'signin', 'signout'
         ]);
+        */
     }
 
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
+        $this->Auth->config('authenticate', [
+            'Form' => ['userModel' => 'Students'],
+        ]);
     }
 
     /**
@@ -38,15 +45,17 @@ class WebExamsController extends AppController
      */
     public function index()
     {
-        $this->viewBuilder()->layout('webexam');
-        /*
-        $this->paginate = [
-            'contain' => ['Exams', 'Users']
-        ];
-        $webExams = $this->paginate($this->WebExams);
+        $this->loadModel('Exams');
+        $this->loadModel('Surveys');
 
-        $this->set(compact('webExams'));
-        */
+        $this->viewBuilder()->layout('webexam');
+
+        $this->paginate = [
+            'contain' => ['Surveys'],
+            'limit' => 50,
+        ];
+        $exams = $this->paginate($this->Exams);
+        $this->set(compact('exams'));
     }
 
     /**
@@ -58,16 +67,13 @@ class WebExamsController extends AppController
      */
     public function view($id = null)
     {
+        $this->loadModel('Exams');
         $this->viewBuilder()->layout('webexam');
-        /*
-        $webExam = $this->WebExams->get($id, [
-            'contain' => ['Exams', 'Users']
+        $exam = $this->Exams->get($id, [
+            'contain' => ['Prefectures']
         ]);
-
-        $this->set('webExam', $webExam);
-        */
+        $this->set(compact('exam'));
     }
-
 
     public function app()
     {
@@ -106,7 +112,6 @@ class WebExamsController extends AppController
      */
     public function signin()
     {
-        /*
         if($this->Auth->user('id')) {
             return $this->redirect(['action' => 'index']);
         }
@@ -115,13 +120,14 @@ class WebExamsController extends AppController
             $user = $this->Auth->identify();
 
             if ($user) {
+                $this->log($user);
+
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
 
             $this->Flash->error('ユーザー名またはパスワードが不正です。');
         }
-        */
 
         $this->viewBuilder()->setLayout('');
     }

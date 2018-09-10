@@ -17,6 +17,12 @@ class TestsController extends AppController
         $this->loadComponent('Bitly');
     }
 
+
+    public function office365() {
+        
+
+    }
+
     public function index()
     {
 

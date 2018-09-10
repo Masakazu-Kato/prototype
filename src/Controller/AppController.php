@@ -71,22 +71,50 @@ class AppController extends Controller
 
     protected function _initAuthComponent()
     {
-        $this->loadComponent('Auth', [
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
+        if ($this->request->controller == 'WebExams') {
+            // 一般
+            $this->loadComponent('Auth', [
+                'authenticate' => [
+                    'Form' => [
+                        'fields' => [
+                            'username' => 'email',
+                            'password' => 'password'
+                        ]
                     ]
-                ]
-            ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'signin'
-            ],
-            'unauthorizedRedirect' => $this->referer()
-        ]);
-
+                ],
+                'loginAction' => [
+                    'controller' => 'WebExams',
+                    'action' => 'signin'
+                ],
+                'loginRedirect' => [
+                    'controller' => 'WebExams',
+                    'action' => 'index'
+                ],
+                'unauthorizedRedirect' => $this->referer()
+            ]);
+            $this->Auth->sessionKey = 'WebExams';
+        } else {
+            // 管理者
+            $this->loadComponent('Auth', [
+                'authenticate' => [
+                    'Form' => [
+                        'fields' => [
+                            'username' => 'email',
+                            'password' => 'password'
+                        ]
+                    ]
+                ],
+                'loginAction' => [
+                    'controller' => 'Users',
+                    'action' => 'signin'
+                ],
+                'loginRedirect' => [
+                    'controller' => 'Homes',
+                    'action' => 'index'
+                ],
+                'unauthorizedRedirect' => $this->referer()
+            ]);
+        }
         return $this;
     }
 

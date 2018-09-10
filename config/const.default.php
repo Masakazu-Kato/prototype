@@ -42,7 +42,18 @@ return [
         'bitly' => [
             'baseurl'       => '',
             'access_token'  => '',
-        ]
+        ],
+        'office365' => [
+            'authorize_url'    => '',
+            'access_token_url' => '',
+            'graph_me_url'     => '',
+            'grant_type'       => '',
+            'redirect_url'     => '',
+            'client_id'        => '',
+            'client_secret'    => '',
+            'scope'            => '',
+            'state'            => ''
+        ],
 
     ]
 ];

@@ -9,9 +9,9 @@ use Cake\Validation\Validator;
 use App\Library\ORM\Table;
 
 /**
- * WebExams Model
+ * WebExamLogs Model
  */
-class WebExamsTable extends Table
+class WebExamLogsTable extends Table
 {
 
     /**
@@ -24,14 +24,18 @@ class WebExamsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('web_exams');
-        $this->setDisplayField('name');
+        $this->setTable('web_exam_logs');
+        $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Exams', [
             'foreignKey' => 'exam_id',
+            'joinType' => 'LEFT'
+        ]);
+        $this->belongsTo('Students', [
+            'foreignKey' => 'student_id',
             'joinType' => 'LEFT'
         ]);
         $this->belongsTo('Users', [
@@ -53,24 +57,14 @@ class WebExamsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->allowEmpty('name');
+            ->integer('cycle')
+            ->requirePresence('cycle', 'create')
+            ->notEmpty('cycle');
 
         $validator
-            ->integer('minutes')
-            ->requirePresence('minutes', 'create')
-            ->notEmpty('minutes');
-
-        $validator
-            ->dateTime('start')
-            ->requirePresence('start', 'create')
-            ->notEmpty('start');
-
-        $validator
-            ->dateTime('end')
-            ->requirePresence('end', 'create')
-            ->notEmpty('end');
+            ->integer('seconds')
+            ->requirePresence('seconds', 'create')
+            ->notEmpty('seconds');
 
         return $validator;
     }
@@ -84,7 +78,8 @@ class WebExamsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        // $rules->add($rules->existsIn(['exam_id'], 'Exams'));
+        $rules->add($rules->existsIn(['exam_id'], 'Exams'));
+        // $rules->add($rules->existsIn(['student_id'], 'Students'));
         // $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
